@@ -6,7 +6,8 @@ fish = []
 for i in lines[0]:
     if i != ',' and i !='\n':
         fish.append(int(i))
-days = 256
+
+days = 256 #80
 
 today = {0:0, 1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0}
 tomorrow = {0:0, 1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0}
