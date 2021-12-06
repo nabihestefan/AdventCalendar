@@ -10,5 +10,5 @@ for i in range(0,256):
     today[0:8] = today[1:]
     today[8] = new_fish
     today[6] += new_fish
-    
+
 print(sum(today))
