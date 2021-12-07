@@ -1,8 +1,5 @@
 with open('day1.txt') as f:
-    lines = f.readlines()
-measurements = []
-for i in lines:
-    measurements.append(int(i))
+    measurements = [int(x) for x in f.readlines()[.split('\n')]
 
 i = 2
 increases = 0
