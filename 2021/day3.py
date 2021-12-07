@@ -1,66 +1,49 @@
-class Num:
-    def __init__(self, str):
-        self.nums = [int(str[0]), int(str[1]), int(str[2]), int(str[3]),int(str[4]), int(str[5]), int(str[6]), int(str[7]),int(str[8]), int(str[9]), int(str[10]), int(str[11])]
+data = []
+with open("day3.txt", "r") as file:
+    for line in file:
+        temp = str(line.strip())
+        data.append(temp)
 
-def binToNum(bin):
-    i = 0
-    num = 0
-    for i in range(len(bin)):
-        num += 2^(i)*bin[i]
-    return num
+ox_data = data.copy()
+co_data = data.copy()
 
-with open('day3.txt') as f:
-    lines = f.readlines()
+for i in range(len(ox_data[0])):
+    ox_bit_list = []
+    co_bit_list = []
 
-numbers = []
-for str in lines:
-    numbers.append([int(str[0]), int(str[1]), int(str[2]), int(str[3]),int(str[4]), int(str[5]), int(str[6]), int(str[7]),int(str[8]), int(str[9]), int(str[10]), int(str[11])])
+    for point in ox_data:
+        ox_bit_list.append(point[i])
 
-co2 = numbers2693
-ind = 0
-while len(co2) > 1 and ind < 12:
-    total = 0
+    for point in co_data:
+        co_bit_list.append(point[i])
 
-    for i in co2:
-        total += i[ind]
-    avg = total/len(co2)
+    if ox_bit_list.count('1') >= ox_bit_list.count('0'):
+        ox_common_point = '1'
+    else:
+        ox_common_point = '0'
 
-    print(ind)
-    print(int(round(avg,0)))
+    if co_bit_list.count('1') < co_bit_list.count('0'):
+        co_common_point = '1'
+    else:
+        co_common_point = '0'
 
-    for i in co2:
-        if i[ind] != int(round(avg,0)):
-            co2.remove(i)
-            print(i)
+    ox_to_remove = []
+    co_to_remove = []
 
-    print("A")
-    for i in co2:
-        print(i)
-    ind += 1
+    for point in ox_data:
+        if point[i] != ox_common_point:
+            ox_to_remove.append(point)
 
+    for trash in ox_to_remove:
+        if len(ox_data) > 1:
+            ox_data.remove(trash)
 
-for i in co2:
-    print(i)
-#
-#
-# if total[0] > len(numbers)/2:
-#         average = 1
-#     else:
-#         average = 0
-#
-# not_average = []
-# for i in average:
-#     if i == 0:
-#         not_average.append(1)
-#     else:
-#         not_average.append(0)
-#
-# a = binToNum(average)
-# b = binToNum(not_average)
-# print(average)
-# print(not_average)
-# print(a)
-# print(b)
-# print(a*b)
+    for point in co_data:
+        if point[i] != co_common_point:
+            co_to_remove.append(point)
 
-co2 = 2693
+    for trash in co_to_remove:
+        if len(co_data) > 1:
+            co_data.remove(trash)
+
+print(int(ox_data[0],2), int(co_data[0],2), int(ox_data[0],2) * int(co_data[0],2))
