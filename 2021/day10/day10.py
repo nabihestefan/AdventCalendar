@@ -3,53 +3,22 @@ files = ['input.txt', 'inputTest.txt']
 with open(files[0], 'r') as f:
     lines =  [a.strip() for a in f.readlines()]
 
+openers = ("(", "[", "{", "<")
+closers = {")": ("(", 3), "]": ("[", 57), "}": ("{", 1197), ">": ("<", 25137)}
+
+
 score = 0
 remover = []
 for i in lines:
     line = ""
     for j in i:
-        if j == "(":
-            line += "("
-        elif j == "[":
-            line += "["
-        elif j == "{":
-            line += "{"
-        elif j == "<":
-            line += "<"
-
-        elif j == ")":
-            if line[-1] =="(":
-                line = line[:-1]
+        if j in openers: line += j
+        else:
+            if line[-1] == closers[j][0]: line = line[:-1]
             else:
-                score += 3
+                score += closers[j][1]
                 remover.append(i)
                 break
-
-        elif j == "]":
-            if line[-1] =="[":
-                line = line[:-1]
-            else:
-                score += 57
-                remover.append(i)
-                break
-
-        elif j == "}":
-            if line[-1] =="{":
-                line = line[:-1]
-            else:
-                score += 1197
-                remover.append(i)
-                break
-
-        elif j == ">":
-            if line[-1] =="<":
-                line = line[:-1]
-            else:
-                score += 25137
-                remover.append(i)
-                break
-
-
 
 print("PART1")
 print(score)
@@ -62,41 +31,13 @@ for i in lines:
     score = 0
     line = ""
     for j in i:
-        if j == "(":
-            line += "("
-        elif j == "[":
-            line += "["
-        elif j == "{":
-            line += "{"
-        elif j == "<":
-            line += "<"
-
-        elif j == ")":
-            line = line[:-1]
-
-        elif j == "]":
-            line = line[:-1]
-
-        elif j == "}":
-            line = line[:-1]
-
-        elif j == ">":
-            line = line[:-1]
+        if j in openers: line += j
+        else: line = line[:-1]
 
 
-    for j in reversed(range(len(line))):
-        if line[j] == "(":
-            score *= 5
-            score += 1
-        elif line[j] == "[":
-            score *= 5
-            score += 2
-        elif line[j] == "{":
-            score *= 5
-            score += 3
-        elif line[j] == "<":
-            score *= 5
-            score += 4
+    for j in reversed(line):
+        score *= 5
+        score += openers.index(j)+1
     scores.append(score)
 
 
