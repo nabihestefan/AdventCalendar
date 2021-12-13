@@ -1,39 +1,24 @@
+from collections import Counter
 files = ['input.txt', 'inputTest.txt']
 ## Parsing
 with open(files[0], 'r') as f:
     lines =  [a.strip() for a in f.readlines()]
-    points = [(int(a[0:a.index(",")]), int(a[a.index(",")+1:])) for a in lines[0:lines.index("")]]
+    points = [[int(a[0:a.index(",")]), int(a[a.index(",")+1:])] for a in lines[0:lines.index("")]]
     folds = [(a[a.index("=")-1: a.index("=")], int(a[a.index("=")+1:])) for a in lines[lines.index("")+1:]]
 
 for i in folds:
     remove, add = [], []
     if i[0] == "x":
         for j in points:
-            if j[0] > i[1]:
-                newPoint = (j[0]-2*(j[0]-i[1]), j[1])
-                remove.append(j)
-                add.append(newPoint)
+            if j[0] > i[1]: j[0] = j[0]-2*(j[0]-i[1])
 
     elif i[0] == "y":
         for j in points:
-            if j[1] > i[1]:
-                newPoint = (j[0], j[1]-2*(j[1]-i[1]))
-                remove.append(j)
-                add.append(newPoint)
-
-    for j in remove:
-        for k in points:
-            if k[0] == j[0] and k[1] == j[1]:
-                points.remove(k)
-                break
-
-    for j in add:
-        if not(j in points):
-            points.append(j)
+            if j[1] > i[1]: j[1] = j[1]-2*(j[1]-i[1])
 
 
 print("PART1")
-print(len(points))
+print(len(Counter([(point[0], point[1]) for point in points])))
 board = []
 for i in range(6):
     line = []
