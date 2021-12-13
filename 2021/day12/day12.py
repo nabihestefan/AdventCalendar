@@ -17,11 +17,9 @@ for i in lines:
 
 def pathsThrough(visited = ["start"]):
     current = visited[-1]
-
     if current == "end": return [visited]
 
     newPaths = []
-
     for next in paths[current]:
         if next.islower() and next in visited:
             continue
