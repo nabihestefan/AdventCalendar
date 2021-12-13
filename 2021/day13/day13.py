@@ -46,4 +46,5 @@ for i in points:
 
 print("PART2")
 for i in board:
-    print(i)
+    str = ""
+    print(str.join(i))
