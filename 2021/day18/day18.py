@@ -1,4 +1,3 @@
-import ast
 files = ['input.txt', 'inputTest.txt']
 ## Parsing
 with open(files[0], 'r') as f:
