@@ -1,4 +1,3 @@
-from copy import deepcopy
 files = ['input.txt', 'inputTest.txt']
 ## Parsing
 lines = []
