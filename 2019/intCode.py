@@ -73,7 +73,7 @@ class endInstr(Instr):
         return None
 
 class IntCode:
-    def __init__(self, program, inputs=[]):
+    def __init__(self, program, inputs=[], inputFunc=None):
         self.program = program
         self.inputs = inputs[::-1]
         self.output = None
@@ -81,6 +81,7 @@ class IntCode:
         self.pointer = 0
         self.relativeBase = 0
         self.memory = {}
+        self.inputFunc = inputFunc
 
     def getInstr(self, instCode):
         for inst in Instr.__subclasses__():
@@ -120,7 +121,16 @@ class IntCode:
             self.memory[addr] = val
 
     def getInput(self):
-        return self.inputs.pop()
+        return self.inputs.pop() if self.inputs else self.inputFunc()
 
     def addInput(self,input):
         self.inputs = [input]+self.inputs
+
+    def copy(self):
+        copy = IntCode(self.program, self.inputs[:], self.inputFunc)
+        copy.output = self.output
+        copy.end = self.end
+        copy.pointer = self.pointer
+        copy.relativeBase = self.relativeBase
+        copy.memory = self.memory
+        return copy
