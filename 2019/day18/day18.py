@@ -1,5 +1,4 @@
 import heapq
-import time
 files = ['input.txt', 'inputTest.txt']
 ## Parsing
 with open(files[0], 'r') as f:
@@ -64,11 +63,8 @@ def run(grid, partTwo):
         for i, (cx, cy) in enumerate(cpos):
             for l, nx, ny, key in reachableKeys(cx, cy, keys):
                 npos = cpos[0:i] + ((nx, ny),) + cpos[i+1:]
-                heapq.heappush(q, (d + l, npos, keys | frozenset([key])))
+                heapq.heappush
+startTime = time.time()(q, (d + l, npos, keys | frozenset([key])))
 
-startTime = time.time()
 print("Part 1: ", run(grid[:], False))
-print("Runtime: ", time.time()-startTime)
-startTime = time.time()
 print("Part 2: ", run(grid[:], True))
-print("Runtime: ", time.time()-startTime)
