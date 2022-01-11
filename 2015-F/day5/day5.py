@@ -5,28 +5,33 @@ with open(files[0], 'r') as f:
 
 total = 0
 ##Part1
-# banned = ['ab', 'cd', 'pq', 'xy']
-#
-# for i in lines:
-#     naughty = True
-#
-#     vow = 0
-#     for v in vowels:
-#         vow += i.count(v)
-#
-#     double = False
-#     for j in range(len(i)-1):
-#         if i[j] == i[j+1]:
-#             double = True
-#
-#     if double and (vow>=3):
-#         naughty = False
-#
-#     for j in banned:
-#         if j in i:
-#             naughty = True
-#     if not naughty:
-#         total += 1
+banned = ['ab', 'cd', 'pq', 'xy']
+vowels = "aeiou"
+
+for i in lines:
+    naughty = True
+
+    vow = 0
+    for v in vowels:
+        vow += i.count(v)
+
+    double = False
+    for j in range(len(i)-1):
+        if i[j] == i[j+1]:
+            double = True
+
+    if double and (vow>=3):
+        naughty = False
+
+    for j in banned:
+        if j in i:
+            naughty = True
+    if not naughty:
+        total += 1
+
+print("Part 1: ", total)
+
+total = 0
 
 ##Part 2
 for i in lines:
@@ -51,6 +56,5 @@ for i in lines:
 
     if not naughty:
         total += 1
-    print(naughty)
 
-print(total)
+print("Part 2: ", total)
