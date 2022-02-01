@@ -12,7 +12,6 @@ for i in lines:
 ## General
 
 def value(wire):
-    print(wire)
     try:
         wires[wire] = int(wire)
         return int(wire)
