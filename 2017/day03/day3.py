@@ -3,12 +3,15 @@ with open('input.txt', 'r') as f:
     num = int(f.readlines()[0])
 
 def part1():
-    sq = int(sqrt(num))
-    if sq%2 == 0: sq-=1
-    layer = (sq+1)//2
-    left = (num - sq**2)%layer
-    row = abs(layer - left)
-    return(left+layer)
+    val = 1
+    d = dict()
+    d[(0,0)] = val
+    x,y,layer = 1,0,1
+    while val < num:
+        val+=1
+        d[(x,y)] = val
+        x,y,layer = moveNext(x,y,layer)
+    return abs(x) + abs(y) - 1
 
 def moveNext(x,y,layer):
     if x == -1*layer:
