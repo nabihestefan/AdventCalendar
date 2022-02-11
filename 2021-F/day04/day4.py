@@ -89,7 +89,7 @@ def form(str):
 with open('day4.txt') as f:
     lines = f.readlines()
 
-numbers = form(lines.pop(0))
+numbers = map(int, lines.pop(0).split(","))
 
 i = 0
 boards =[]
@@ -102,11 +102,17 @@ while i < len(lines):
     i += 6
     boards.append(Board(line1,line2,line3,line4,line5))
 
+def run(numbers, boards, part2):
+    for i in numbers:
+        toRemove = []
+        for j in boards:
+            j.hasNumber(i)
+            if j.solved():
+                if not part2:
+                    return i*j.unchecked()
+                elif len(boards) == 1: return i*j.unchecked()
+                toRemove.append(j)
+        for i in toRemove: boards.remove(i)
 
-for i in numbers:
-    for j in boards:
-        j.hasNumber(i)
-        if j.solved():
-            print(i*j.unchecked())
-            print(j.checked)
-            boards.remove(j)
+print("Part 1: ", run(numbers, boards, False))
+print("Part 1: ", run(numbers, boards, True))
