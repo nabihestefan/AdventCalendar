@@ -18,36 +18,34 @@ def knothash(word):
             pos = (pos + length + skip) % len(values)
             skip += 1
 
-    dense = ""
+    knothash = ""
     for i in range(16):
         num = 0
         for j in range(16): num ^= values[i*16 + j]
-        dense += hex(num)[2:] if len(hex(num)) == 4 else "0" + hex(num)[2:]
+        for j in hex(num)[2:].zfill(2): knothash += bin(int(j, base=16))[2:].zfill(4)
 
-    knothash = ""
-    for i in dense: knothash += bin(int(i,base=16))[2:].zfill(4)
     return knothash
 
-def adjacent(x,y):
-    squares.remove((x,y))
+def adjacent(coords, squares):
+    x,y = coords
+    squares.remove(coords)
     for dx,dy in [(1,0), (0,1), (-1,0), (0,-1)]:
-        if (x+dx, y+dy) in squares: adjacent(x+dx, y+dy)
+        if (x+dx, y+dy) in squares:
+            adjacent((x+dx, y+dy), squares)
     return 1
 
-squares = []
+
 def run():
+    squares = []
     for i in range(128):
         khash = knothash(hash + "-" + str(i))
         for ind, c in enumerate(khash):
             if c == "1": squares.append((i,ind))
 
-    p1 = len(squares)
-    regions = 0
-    while squares: regions += adjacent(squares[0][0], squares[0][1])
+    p1, regions = len(squares), 0
+    while squares:
+        regions += adjacent(squares[0], squares)
 
     return p1, regions
-
-
-
 
 print("Part 1&2: ", run())
