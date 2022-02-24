@@ -17,7 +17,7 @@ def part1():
     return values[0] * values[1]
 
 def part2():
-    nums = map(ord, lines) + [17, 31, 73, 47, 23]
+    nums = list(map(ord, lines)) + [17, 31, 73, 47, 23]
     skip = pos = 0
     values = list(range(256))
 
@@ -31,7 +31,7 @@ def part2():
     for i in range(16):
         num = 0
         for j in range(16): num ^= values[i*16 + j]
-        dense += hex(num)[2:] if len(hex(num)) == 4 else "0" + hex(num)[2:]
+        dense += hex(num)[2:].zfill(2)
 
     return dense
 
