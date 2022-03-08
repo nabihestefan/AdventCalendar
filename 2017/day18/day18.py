@@ -4,9 +4,16 @@ class Function:
     def __init__(self, name):
         self.played = []
         self.ind = 0
-        self.regs = {"a":0, "i":0, "b":0, "f":0, "c":0, "d":0, "p":name}
+        self.regs = dict()
+        self.startRegs()
+        self.regs["p"] = name
         self.sent = 0
         self.deadlocked = False
+
+    def startRegs(self):
+        for i in lines:
+            if not i[1].isnumeric():
+                self.regs[i[1]] = 0
 
 def runInst(fCur, fOther, part1):
     line = lines[fCur.ind]
@@ -31,7 +38,7 @@ def runInst(fCur, fOther, part1):
         fCur.regs[a] %= int(b) if b not in fCur.regs.keys() else fCur.regs[b]
         fCur.ind += 1
     elif inst == "rcv":
-        if part1: return fCur.played[-1]
+        if part1 and fCur.regs[a] != 0: return fCur.played[-1]
         if len(fOther.played) > 0:
             fCur.regs[a] = fOther.played.pop(0)
             fCur.ind += 1
