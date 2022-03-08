@@ -2,7 +2,7 @@ with open('input.txt', 'r') as f: map =  [a for a in f.readlines()]
 
 def move(x,y,prevMove):
     moves = {"N": lambda x,y: (x, y-1), "E": lambda x,y: (x+1, y),
-            "S":lambda x,y: (x, y+1), "W":lambda x,y: (x-1, y)}
+             "S": lambda x,y: (x, y+1), "W": lambda x,y: (x-1, y)}
 
     moveDict = {(0,-1): "N", (1,0): "E", (0,1): "S", (-1,0):"W"}
 
