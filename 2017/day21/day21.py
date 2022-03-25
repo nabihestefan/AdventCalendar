@@ -39,6 +39,7 @@ insts = {2: insts2, 3:insts3}
 def run(steps):
     grid = [[False, True, False], [False, False, True], [True, True, True]]
     for step in range(steps):
+        # print(step)
         #For every step
         next = []
         fixed = False
@@ -67,8 +68,7 @@ def run(steps):
                             if rot == 4: section = flip(section)
                             else: section = rotate(section)
                         # Once found go through the array and add the new values
-                        for i in
-                        nextGrid = [] range(val+1):
+                        for i in range(val+1):
                             next[(row*(val+1))+i] += nextSec[i*(val+1): i*(val+1)+(val+1)]
 
         # If youre ending dont copy to grid, not worth it
