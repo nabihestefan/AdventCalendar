@@ -1,4 +1,4 @@
-files = ['../input.txt', '../inputTest.txt']
+files = ['input.txt', 'inputTest.txt']
 with open(files[0], 'r') as f:
     data = [int(x) for x in f.readlines()]
 
