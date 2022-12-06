@@ -1,10 +1,10 @@
 files = ['input.txt', 'inputTest.txt']
 with open(files[0], 'r') as f:
-    data = [int(x) for x in f.readlines()]
+    data = f.read().strip()
 
-def run(partTwo, data):
-    return None
-
-
-print("Part 1: ", run(False, data))
-print("Part 2: ", run(True, data))
+def run(length, data):
+    for i, _ in enumerate(data):
+        if length == len(set(data[i:i+length])): return i+length
+            
+print("Part 1: ", run(4, data))
+print("Part 2: ", run(14, data))
