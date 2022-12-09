@@ -8,13 +8,14 @@ dirs = {"R": 1j, "L":-1j, "U": 1, "D":-1}
 def inRange(head,tail):
     movement = 0 + 0j
     dif = head-tail
+    sign = lambda x: x/abs(x)
 
-    if abs(dif.real)>1:
-        if dif.imag != 0: movement += complex(0, (dif.imag/abs(dif.imag)))
-        movement += (dif.real/abs(dif.real))
-    elif abs(dif.imag)>1:
-        if dif.real != 0: movement += (dif.real/abs(dif.real))
-        movement += complex(0, (dif.imag/abs(dif.imag)))
+    if abs(dif.real) > 1:
+        if dif.imag != 0: movement += complex(0, sign(dif.imag))
+        movement += sign(dif.real)
+    elif abs(dif.imag) > 1:
+        if dif.real != 0: movement += sign(dif.real)
+        movement += complex(0, sign(dif.imag))
 
     return movement
 
