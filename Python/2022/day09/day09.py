@@ -3,7 +3,7 @@ with open(files[0], 'r') as f:
     data = [x.split() for x in f.readlines()]
 
 # dirs = {"R": (0,1), "L":(0,-1), "U": (1,0), "D":(-1,0)}
-dirs = {"R": 0+1j, "L":0-1j, "U": 1, "D":-1}
+dirs = {"R": 1j, "L":-1j, "U": 1, "D":-1}
 
 def inRange(head,tail):
     movement = 0 + 0j
@@ -17,7 +17,7 @@ def inRange(head,tail):
         movement += complex(0, (dif.imag/abs(dif.imag)))
 
     return movement
-    
+
 def run(partTwo, data):
     tailPos = set()
     if not partTwo: ropeLen = 2
