@@ -3,7 +3,6 @@ files = ['input.txt', 'inputTest.txt']
 with open(files[0], 'r') as f:
     data = [list(x.strip()) for x in f.readlines()]
 
-map = []
 g = nx.DiGraph()
 p2Start = []
 

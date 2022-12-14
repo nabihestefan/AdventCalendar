@@ -1,4 +1,3 @@
-from functools import cmp_to_key
 files = ['input.txt', 'inputTest.txt']
 with open(files[0], 'r') as f:
     data = [pair.strip() for pair in f.read().split("\n\n")]

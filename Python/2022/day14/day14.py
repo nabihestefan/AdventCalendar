@@ -19,27 +19,23 @@ for structure in data:
 floor = max(rocks, key = lambda x: x[1])[1]+2
 for i in range(500-floor-1000, 500+floor+1000):
     rocks.add((i, floor))
-
-def run(rocks):
-    p1Done = False
-    for s in range(1000000000):
-        sand = (500,0)
-        while True:
-            if sand[1]+1 >= floor and (not p1Done):
-                p1Done = True
-                print("Part 1: ", s)
-            
-            if (sand[0], sand[1]+1) not in rocks:
-                sand = (sand[0], sand[1]+1)
-            elif (sand[0]-1, sand[1]+1) not in rocks:
-                sand = (sand[0]-1, sand[1]+1)
-            elif (sand[0]+1, sand[1]+1) not in rocks:
-                sand = (sand[0]+1, sand[1]+1)
-            else:
-                break
-        if sand == (500,0):
-            print("Part 2: ", s+1)
-            return
-        rocks.add(sand)
-
-run(rocks)
+p1Done = False
+for s in range(1000000000):
+    sand = (500,0)
+    while True:
+        if sand[1]+1 >= floor and (not p1Done):
+            p1Done = True
+            print("Part 1: ", s)
+        
+        if (sand[0], sand[1]+1) not in rocks:
+            sand = (sand[0], sand[1]+1)
+        elif (sand[0]-1, sand[1]+1) not in rocks:
+            sand = (sand[0]-1, sand[1]+1)
+        elif (sand[0]+1, sand[1]+1) not in rocks:
+            sand = (sand[0]+1, sand[1]+1)
+        else:
+            break
+    if sand == (500,0):
+        print("Part 2: ", s+1)
+        break
+    rocks.add(sand)
