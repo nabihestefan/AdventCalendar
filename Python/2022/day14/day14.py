@@ -1,10 +1,45 @@
 files = ['input.txt', 'inputTest.txt']
 with open(files[0], 'r') as f:
-    data = [int(x) for x in f.readlines()]
+    data = [x.split("->") for x in f.read().split("\n")]
 
-def run(partTwo, data):
-    return None
+rocks = set()
+for structure in data:
+    structure = [list(map(int, pair.split(","))) for pair in structure]
+    start = structure[0]
+    rocks.add(tuple(start))
+    for next in structure[1:]:
+        if start[0] == next[0]:
+            for i in range(min(start[1], next[1]), max(start[1], next[1])+1):
+                rocks.add((start[0], i))
+        elif start[1] == next[1]:
+            for i in range(min(start[0], next[0]), max(start[0], next[0])+1):
+                rocks.add((i, start[1]))
+        start = next
 
+floor = max(rocks, key = lambda x: x[1])[1]+2
+for i in range(500-floor-1000, 500+floor+1000):
+    rocks.add((i, floor))
 
-print("Part 1: ", run(False, data))
-print("Part 2: ", run(True, data))
+def run(rocks):
+    p1Done = False
+    for s in range(1000000000):
+        sand = (500,0)
+        while True:
+            if sand[1]+1 >= floor and (not p1Done):
+                p1Done = True
+                print("Part 1: ", s)
+            
+            if (sand[0], sand[1]+1) not in rocks:
+                sand = (sand[0], sand[1]+1)
+            elif (sand[0]-1, sand[1]+1) not in rocks:
+                sand = (sand[0]-1, sand[1]+1)
+            elif (sand[0]+1, sand[1]+1) not in rocks:
+                sand = (sand[0]+1, sand[1]+1)
+            else:
+                break
+        if sand == (500,0):
+            print("Part 2: ", s+1)
+            return
+        rocks.add(sand)
+
+run(rocks)
