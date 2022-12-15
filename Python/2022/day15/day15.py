@@ -29,6 +29,22 @@ def part1(pairs):
     return len(empty)
 
 def part2(pairs):
+    # Non z3 solutions, runs too long
+    # pairs = sorted(pairs, key=lambda x: x[0][0])
+    # for x in range(0, 4000001):
+    #     for y in range(0, 4000001):
+    #         print(x,y)
+    #         answer = True
+    #         for sensor, beacon in pairs:
+    #             sx, sy = sensor
+    #             bx, by = beacon
+    #             dist = abs(bx-sx) + abs(by-sy)
+    #             if (abs(sx-x) + abs(sy-y) <= dist):
+    #                 answer = False
+    #                 break
+    #         if answer:
+    #             return x * 4000000 + y
+    
     solver = z3.Solver()
     x = z3.Int("x")
     y = z3.Int("y")
@@ -47,9 +63,6 @@ def part2(pairs):
     solver.check()
     print(solver.model())
     return 2638485 * 4000000 + 2650264
-
-
-
 
 print("Part 1: ", part1(pairs))
 print("Part 2: ", part2(pairs))
