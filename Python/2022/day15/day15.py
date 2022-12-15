@@ -18,9 +18,8 @@ def part1(pairs):
         sx, sy = sensor
         bx, by = beacon
         dist = abs(bx-sx) + abs(by-sy)
-
-        for y in range(sy-dist, sy+dist+1):
-            if y != 2000000: continue 
+        if 2000000 in range(sy-dist, sy+dist+1):
+            y = 2000000
             yDif = abs(abs(sy-y) - dist)
             for x in range(sx-yDif, sx+yDif+1):
                 if (x,y) != beacon and (x,y) != sensor:
