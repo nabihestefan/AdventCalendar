@@ -55,5 +55,5 @@ def run(partTwo, rates, tunnels, start):
         data = newData
     return max(data)[0]
 
-# print("Part 1: ", run(False, rates, tunnels, "AA"))
+print("Part 1: ", run(False, rates, tunnels, "AA"))
 print("Part 2: ", run(True, rates, tunnels, "AA"))
