@@ -1,20 +1,18 @@
 from collections import deque
 files = ['input.txt', 'inputTest.txt']
-with open(files[0], 'r') as f:
-    data = [x for x in f.readlines()]
-
-
 robots = []
-minerals = ["ore", "clay", "obsidian", "geode"]
-for i in data:
-    words = i.split()
-    oreCore = int(words[6])
-    clayCore = int(words[12])
-    obsCore = int(words[18])
-    obsCclay = int(words[21])
-    geoCore = int(words[27])
-    geoCobs = int(words[30])
-    robots.append((oreCore,clayCore,obsCore,obsCclay, geoCore, geoCobs))
+minerals = ["ore", "clay", "obsidian", "geode"]\
+
+with open(files[0], 'r') as f:
+    for i in f.readlines():
+        words = i.split()
+        oreCore = int(words[6])
+        clayCore = int(words[12])
+        obsCore = int(words[18])
+        obsCclay = int(words[21])
+        geoCore = int(words[27])
+        geoCobs = int(words[30])
+        robots.append((oreCore,clayCore,obsCore,obsCclay, geoCore, geoCobs))
 
 
 def blueprintSimulation(blueprint,time):
@@ -23,8 +21,7 @@ def blueprintSimulation(blueprint,time):
     maxGeode = 0
     seen = set()
     while queue:
-        state = queue.popleft()
-        Rore, Rclay, Robs, Rgeo, ore, clay, obs, geo, mins = state
+        Rore, Rclay, Robs, Rgeo, ore, clay, obs, geo, mins = queue.popleft()
         maxGeode = max(maxGeode, geo)
         if mins == 0: continue
 
