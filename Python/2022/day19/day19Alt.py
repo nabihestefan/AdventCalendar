@@ -42,8 +42,7 @@ def blueprintSimulation(blueprint,time):
         queue.append((robs, tuple(x+y for x,y in zip(mats, robs)), mins-1))
         # go through every robot in blueprint
         for iR, robCost in enumerate(blueprint):
-            costs = [x>=y  for x,y in zip(mats, robCost)]
-            if False in costs: continue
+            if False in [x>=y  for x,y in zip(mats, robCost)]: continue
             newRobots = list(robs)
             newRobots[iR] += 1
             queue.append((tuple(newRobots), tuple(x+y-z for x,y,z in zip(mats,robs,robCost)), mins-1))
