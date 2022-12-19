@@ -1,8 +1,6 @@
 from collections import deque
 files = ['input.txt', 'inputTest.txt']
 robots = []
-minerals = ["ore", "clay", "obsidian", "geode"]\
-
 with open(files[0], 'r') as f:
     for i in f.readlines():
         words = i.split()
@@ -21,7 +19,8 @@ def blueprintSimulation(blueprint,time):
     maxGeode = 0
     seen = set()
     while queue:
-        Rore, Rclay, Robs, Rgeo, ore, clay, obs, geo, mins = queue.popleft()
+        state = queue.popleft()
+        Rore, Rclay, Robs, Rgeo, ore, clay, obs, geo, mins = state
         maxGeode = max(maxGeode, geo)
         if mins == 0: continue
 
