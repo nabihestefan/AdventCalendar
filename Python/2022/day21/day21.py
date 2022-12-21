@@ -38,7 +38,7 @@ monkeys["humn"].val = 2
 m1ValPost = m1.value
 if m1Val == m1ValPost: m1,m2 = m2,m1
 
-low, high = 0, int(1e25)
+low, high = 0, int(1e42)
 while low < high:
     mid = (low+high)//2
     monkeys["humn"].val = mid
