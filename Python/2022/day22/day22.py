@@ -14,34 +14,29 @@ def parseTiles(tilesRaw):
 
             if val == "#": closedTiles.add(complex(x,y))
     return start, openTiles, closedTiles
-def parseInstructions(instructionsRaw):
-    instructions = []
-    i = 0
-    moves = ""
-    while i < len(instructionsRaw):
-        if instructionsRaw[i] in ["R", "L"]:
-            instructions.append(int(moves))
-            instructions.append(instructionsRaw[i])
-            moves = ""
-        else:
-            moves += instructionsRaw[i]
-        i += 1
-    instructions.append(int(moves))
-
-    return instructions
-instructions = parseInstructions(data[-1].strip())
 start, openTiles, closedTiles = parseTiles(data[:-2])
+instructionsRaw = data[-1].strip()
+instructions = []
+i = 0
+moves = ""
+while i < len(instructionsRaw):
+    if instructionsRaw[i] in ["R", "L"]:
+        instructions.append(int(moves))
+        instructions.append(instructionsRaw[i])
+        moves = ""
+    else:
+        moves += instructionsRaw[i]
+    i += 1
+instructions.append(int(moves))
 
 def nextOpen(partTwo, pos, dir, openTiles, closedTiles):
     next = pos + dir
     if next in openTiles: return next, dir
     if next in closedTiles: return pos, dir
-    # Im wrapping around
     if not partTwo:
         next = pos - dir 
         while next in openTiles or next in closedTiles: next -= dir
         next += dir
-        newDir = dir
     else:
         # Hard coding the edges cause I cant figure out how to do it for every input
         edge1A = [complex(149,i) for i in range(0,50)]
@@ -79,7 +74,7 @@ def nextOpen(partTwo, pos, dir, openTiles, closedTiles):
         if pos in edge7A: next, newDir = edge7B[edge7A.index(pos)], -1
         if pos in edge7B: next, newDir = edge7A[edge7B.index(pos)], -1j
 
-    if next in openTiles: return next, newDir
+    if next in openTiles: return next, newDir if partTwo else dir
     if next in closedTiles: return pos, dir
 
 def run(partTwo, instructions, start, openTiles, closedTiles):
@@ -98,7 +93,6 @@ def run(partTwo, instructions, start, openTiles, closedTiles):
     if dir == -1j: facing = 3
     
     return int(4*(pos.real+1) + 1000*(pos.imag+1) + facing)
-
 
 print("Part 1: ", run(False, instructions, start, openTiles, closedTiles))
 print("Part 2: ", run(True, instructions, start, openTiles, closedTiles))
