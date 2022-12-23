@@ -24,13 +24,12 @@ class Monkey:
         self.false = int(test[2].split()[5])
 
 def run(partTwo, monkeyData):
-
     monkeys = []
     LCM = 1
     for data in monkeyData:
         monkeys.append(Monkey(data[1], data[2], data[3:]))
         if LCM % monkeys[-1].test != 0: LCM *= monkeys[-1].test
-    print(LCM)
+
     steps = 20 if not partTwo else 10000
     for step in range(steps):
         for monkey in monkeys:
@@ -46,13 +45,9 @@ def run(partTwo, monkeyData):
                 else:
                     monkeys[monkey.false].items.append(item)
             monkey.items = []
-        print("STEP ", step)
-        # for m in monkeys:
-        #     print(m.items)
 
     monkeys = sorted(monkeys, key=lambda monkey: monkey.inspected, reverse=True)
     return monkeys[0].inspected * monkeys[1].inspected
-
 
 print("Part 1: ", run(False, monkeyData))
 print("Part 2: ", run(True, monkeyData))
