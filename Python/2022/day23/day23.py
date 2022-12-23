@@ -61,9 +61,7 @@ def move(elves, step):
 
 
 def run(elves):
-    print(elves)
     for step in range(100000000):
-        print(step)
         if step == 10: 
             minX = int(min([x.real for x in elves]))
             maxX = int(max([x.real for x in elves]))
