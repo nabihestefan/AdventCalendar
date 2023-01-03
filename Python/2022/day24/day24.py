@@ -55,9 +55,10 @@ def run(walls, blizzards, start, end):
         if prevStep != steps:
             prevStep = steps
             blizzards = updateBlizzards(blizzards,walls)
+            blizzardPositions = set([x[0] for x in blizzards])
         for move in moves:
             newPos = pos + move
-            if newPos not in set([x[0] for x in blizzards]) and newPos not in walls and (newPos, steps+1) not in visited:
+            if newPos not in blizzardPositions and newPos not in walls and (newPos, steps+1) not in visited:
                 queue.append((newPos, steps+1))
                 visited.add((newPos, steps+1))
    
