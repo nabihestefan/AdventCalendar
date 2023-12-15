@@ -2,14 +2,13 @@ files = ['input.txt', 'inputTest.txt']
 with open(files[0], 'r') as f:
     data = f.read().strip().split(",") 
 
+hash = lambda x, y: ((y + ord(x)) * 17) % 256
+
 def p1(data):
     total = 0
     for i in data:
         val = 0
-        for c in i:
-            val += ord(c)
-            val *= 17
-            val %= 256
+        for c in i: val = hash(c, val)
         total += val
     return total
             
@@ -21,9 +20,7 @@ def p2(data):
         index = 0
         while i[index] not in "=-":
             label += i[index]
-            box += ord(i[index])
-            box *= 17
-            box %= 256
+            box = hash((i[index]), box)
             index += 1
         if i[index] == "-":
             for j, x in enumerate(boxes[box]):
