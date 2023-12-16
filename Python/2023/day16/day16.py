@@ -1,9 +1,13 @@
 files = ['input.txt', 'inputTest.txt']
 with open(files[0], 'r') as f:
-    data = [x.strip() for x in f.readlines()]
+    data = dict()
+    cont = f.read().strip().splitlines()
+    for x, line in enumerate(cont):
+        for y, char in enumerate(line.strip()):
+            data[x+y*1j] = char
 
 def move(beam, dir, data):
-    match data[int(beam.real)][int(beam.imag)]:
+    match data[beam]:
         case ".": return [(beam + dir, dir)]
         case "|": 
             if dir.imag == 0: return [(beam + dir, dir)]
@@ -31,13 +35,13 @@ def run(data, start):
         tiles[beam] = tiles.get(beam, []) + [dir]
         newBeams = move(beam, dir, data)
         for newBeam, newDir in newBeams:
-            if newDir not in tiles.get(newBeam, []) and 0 <= newBeam.real < len(data) and 0 <= newBeam.imag < len(data[0]):
+            if newDir not in tiles.get(newBeam, []) and newBeam in data:
                 queue.append((newBeam, newDir))
         
     return len(tiles)
 
 print("Part 1: ", run(data, (0, 1j)))
-print("Part 2: ", max([run(data, (a, 1j)) for a in range(len(data))] + 
-                      [run(data, (b+(len(data[0])-1)*1j, -1j)) for b in range(len(data))] + 
-                      [run(data, (c*1j, 1)) for c in range(len(data[0]))] + 
-                      [run(data, ((len(data)-1)+d*1j, -1)) for d in range(len(data))]))
+print("Part 2: ", max([run(data, (a, 1j)) for a in range(len(cont))] + 
+                      [run(data, (b+(len(cont)-1)*1j, -1j)) for b in range(len(cont))] + 
+                      [run(data, (c*1j, 1)) for c in range(len(cont))] + 
+                      [run(data, ((len(cont)-1)+d*1j, -1)) for d in range(len(cont))]))
