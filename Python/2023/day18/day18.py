@@ -22,7 +22,8 @@ def run(data, partTwo):
         edgeLen += int(num)
         pos = next
 
-    return int((abs(sum1-sum2) + edgeLen) / 2 + 1)
+    area = abs(sum1-sum2) / 2 # Shoelace Formula
+    return int(area + edgeLen / 2 + 1) # Picks Thorem
                
 print("Part 1: ", run(data, False))
 print("Part 2: ", run(data, True))
