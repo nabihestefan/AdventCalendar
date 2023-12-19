@@ -25,8 +25,8 @@ for part in partsRaw.split('\n'):
     parts.append(eval(part))
 
 def p1(workflows, part, workflow):
-    for conditionP1, result, _ in workflows[workflow]:
-        if conditionP1(part):
+    for condition, result, _ in workflows[workflow]:
+        if condition(part):
             if result in ["A", "R"]: return result == "A"
             return p1(workflows, part, result)
 
@@ -36,10 +36,10 @@ def p2(workflows, workflow, x, m, a, s):
 
     count = 0
 
-    for _, result, conditionP2 in workflows[workflow]:
-        if conditionP2 == None: count += p2(workflows, result, x, m, a, s)
+    for _, result, condition in workflows[workflow]:
+        if condition == None: count += p2(workflows, result, x, m, a, s)
         else:
-            var, rule = conditionP2
+            var, rule = condition
             match var:
                 case "x":
                     newX = tuple(filter(rule, x))
