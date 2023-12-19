@@ -31,6 +31,7 @@ def p1(workflows, part, workflow):
             return p1(workflows, part, result)
 
 def p2(workflows, workflow, x, m, a, s):
+    if len(x) == 0 or len(m) == 0 or len(a) == 0 or len(s) == 0: return 0
     if workflow == "A": return len(x) * len(m) * len(a) * len(s)
     if workflow == "R": return 0
 
@@ -42,20 +43,16 @@ def p2(workflows, workflow, x, m, a, s):
             var, rule = condition
             match var:
                 case "x":
-                    newX = tuple(filter(rule, x))
-                    if len(newX)>0: count += p2(workflows, result, newX, m, a, s)
+                    count += p2(workflows, result, tuple(filter(rule, x)), m, a, s)
                     x = tuple(filter(lambda v: not rule(v), x))
                 case "m":
-                    newM = tuple(filter(rule, m))
-                    if len(newM)>0: count += p2(workflows, result, x, newM, a, s)
+                    count += p2(workflows, result, x, tuple(filter(rule, m)), a, s)
                     m = tuple(filter(lambda v: not rule(v), m))
                 case "a":
-                    newA = tuple(filter(rule, a))
-                    if len(newA)>0: count += p2(workflows, result, x, m, newA, s)
+                    count += p2(workflows, result, x, m, tuple(filter(rule, a)), s)
                     a = tuple(filter(lambda v: not rule(v), a))
                 case "s":
-                    newS = tuple(filter(rule, s))
-                    if len(newS)>0: count += p2(workflows, result, x, m, a, newS)
+                    count += p2(workflows, result, x, m, a, tuple(filter(rule, s)))
                     s = tuple(filter(lambda v: not rule(v), s))
     return count
 
