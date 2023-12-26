@@ -2,3 +2,7 @@
 */.DS_Store
 */*/.DS_Store
 */*/*/.DS_Store
+
+.aoc_tiles/*
+!.aoc_tiles/tiles/
+session.cookie
