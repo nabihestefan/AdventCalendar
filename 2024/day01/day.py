@@ -1,5 +1,4 @@
-files = ['input.txt', 'inputTest.txt']
-with open(files[0], 'r') as f:
+with open('input.txt', 'r') as f:
     lines = [x.strip().split() for x in f.readlines()]
 left = []
 right = []
