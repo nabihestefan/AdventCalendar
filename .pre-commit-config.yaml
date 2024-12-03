@@ -1,0 +1,11 @@
+repos:
+    - repo: https://github.com/LiquidFun/aoc_tiles
+      rev: 0.6.2
+      hooks:
+          - id: aoc-tiles
+            args:
+              - --aoc-dir=./
+                - --auto-add-tiles-to-git=amend
+                - --language-sorting=py,rs,jl,kt
+                # - --session-cookie-path=.aocd_token
+                - --show-total-stars-for-all-years=true
