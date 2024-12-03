@@ -4,7 +4,6 @@ repos:
       hooks:
           - id: aoc-tiles
             args:
-                - --aoc-dir=./
                 - --auto-add-tiles-to-git=amend
                 - --language-sorting=py,rs,jl,kt
                 - --count-as-solved-when=on_leaderboard
