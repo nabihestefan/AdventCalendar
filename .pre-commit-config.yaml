@@ -4,8 +4,8 @@ repos:
       hooks:
           - id: aoc-tiles
             args:
-              - --aoc-dir=./
+                - --aoc-dir=./
                 - --auto-add-tiles-to-git=amend
                 - --language-sorting=py,rs,jl,kt
-                # - --session-cookie-path=.aocd_token
-                - --show-total-stars-for-all-years=true
+                - --count-as-solved-when=on_leaderboard
+                - --show-total-stars-for-all-years=yes
