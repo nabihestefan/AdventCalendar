@@ -7,10 +7,10 @@ Any other languages I used were used to learn while doing problems I knew I unde
 
 <!-- AOC TILES BEGIN -->
 <h1 align="center">
-  Advent of Code - 462/462 ⭐
+  Advent of Code - 464/464 ⭐
 </h1>
 <h1 align="center">
-  2024 - 12 ⭐ - Python
+  2024 - 14 ⭐ - Python
 </h1>
 <a href="2024/day01/day.py">
   <img src=".aoc_tiles/tiles/2024/01.png" width="161px">
@@ -29,6 +29,9 @@ Any other languages I used were used to learn while doing problems I knew I unde
 </a>
 <a href="2024/day06/day.py">
   <img src=".aoc_tiles/tiles/2024/06.png" width="161px">
+</a>
+<a href="2024/day07/day.py">
+  <img src=".aoc_tiles/tiles/2024/07.png" width="161px">
 </a>
 <h1 align="center">
   2023 - 50 ⭐ - Python
