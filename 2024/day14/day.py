@@ -41,4 +41,3 @@ def run(robots):
     
 
 print("Part 1: ", run(robots))
-# print("Part 2: ", p2(robots))
