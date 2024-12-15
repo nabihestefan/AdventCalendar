@@ -4,6 +4,7 @@ with open(files[0], 'r') as f:
 
 moves = [i for i in data[1] if i !='\n']
 rawMap = data[0].splitlines()
+
 def parseMap(rawMap, partTwo):
     boxes = set()
     walls = set()
@@ -81,14 +82,13 @@ def run(rawMap, moves, partTwo=False):
     moveDir = {"<" : -1j, ">" : 1j, "^" : -1, "v" : 1}
     robot, boxes, walls = parseMap(rawMap, partTwo)
     # prettyPrint(robot, boxes, walls, partTwo)
-    for m, i in enumerate(moves): 
+    for i in moves: 
         if partTwo:   
             newRobot, boxesMoved = moveP2(robot, moveDir[i], boxes, walls)
             if newRobot == robot: continue
             newBoxes = set()
             for box in boxes:
-                if box in boxesMoved:
-                    newBoxes.add(box+moveDir[i])
+                if box in boxesMoved: newBoxes.add(box+moveDir[i])
                 else: newBoxes.add(box)
             robot, boxes = newRobot, newBoxes
         else: robot, boxes = moveP1(robot, moveDir[i], boxes, walls)
