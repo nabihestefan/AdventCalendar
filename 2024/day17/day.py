@@ -33,7 +33,7 @@ def run(A, B, C, program):
 # Manually simplified from visual inspection
 def simpleProgram(a):
     b = (a%8)^5
-    c = a // (2**b)
+    c = a//(2**b)
     b = (b^6)^c
     return  b % 8
 
@@ -45,15 +45,12 @@ def p1(A):
         A = A//8
     return out[:-1]
 
-
 def p2(program):
     a = 3
-    for i, val in enumerate(program[::-1][1:]):
+    for val in program[::-1][1:]:
         t = 8*a
         while simpleProgram(t) != val: t += 1
         a = t
-
-
     return a
     
 print("Part 1: ", run(A, B, C, program))
