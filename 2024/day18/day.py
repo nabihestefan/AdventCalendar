@@ -15,8 +15,7 @@ def bfsish(spaces, start):
             if pos+i in spaces and pos+i not in dist.keys():
                 dist[pos+i] = dist[pos] + 1
                 parents[pos+i] = pos
-                if pos+i == complex(L-1, L-1):
-                    return dist, parents
+                if pos+i == complex(L-1, L-1): return dist, parents # Bail once we see the end
                 queue.append(pos+i)
     return dist, parents
 
